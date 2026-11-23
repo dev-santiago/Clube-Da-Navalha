@@ -268,9 +268,9 @@
     const ws = shiftDate(date, -((new Date(date + 'T12:00:00').getDay() + 6) % 7));
     const we = shiftDate(ws, 6);
     $('weekLabel').textContent = `${Number(ws.slice(8))} ${monthShort(ws)} a ${Number(we.slice(8))} ${monthShort(we)}`;
-    $('statScheduled').textContent = scheduled;
+    countUp($('statScheduled'), scheduled);
     $('statDone').textContent = done.length;
-    $('statRevenue').textContent = money(revenue);
+    countUp($('statRevenue'), revenue, money);
 
     if (!list.length) {
       $('agendaList').innerHTML = `<div class="empty"><strong>Nenhum agendamento em ${fmtDate(date)}</strong>Quando um cliente marcar horário, ele aparece aqui.</div>`;

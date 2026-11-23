@@ -145,3 +145,18 @@ async function withBusy(btn, fn) {
   if (btn) btn.disabled = true;
   try { return await fn(); } finally { if (btn) btn.disabled = false; }
 }
+
+// Número que sobe de 0 até o valor (animação curta). Respeita "reduzir movimento".
+function countUp(el, to, format) {
+  const fmt = format || ((n) => String(Math.round(n)));
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !to) { el.textContent = fmt(to); return; }
+  const start = performance.now();
+  const dur = 700;
+  const step = (now) => {
+    const t = Math.min(1, (now - start) / dur);
+    el.textContent = fmt(to * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
