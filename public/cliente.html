@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081325">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Meus agendamentos | Clube da Navalha</title>
+</head>
+<body>
+  <div id="toasts"></div>
+
+  <!-- Login e cadastro do cliente -->
+  <div id="authView" class="auth-page hidden">
+    <aside class="auth-side">
+      <div class="pole" aria-hidden="true"></div>
+      <div class="auth-side-copy">
+        <a href="/" class="brand"><img class="brand-mark" src="/favicon.svg" alt="">Clube da Navalha</a>
+        <div>
+          <h2>Seus horários marcados, sempre à mão.</h2>
+          <ul>
+            <li>Veja os próximos cortes em um só lugar</li>
+            <li>Cancele com um toque se surgir um imprevisto</li>
+            <li>Agende de novo na mesma barbearia em segundos</li>
+          </ul>
+        </div>
+        <span class="faint">Área do cliente</span>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <a href="/" class="back-link">Voltar ao início</a>
+        <h1>Área do cliente</h1>
+        <p>Entre para ver e cancelar seus horários marcados.</p>
+
+        <div class="seg" role="tablist">
+          <button type="button" class="active" data-tabgroup="auth" data-panel="loginPanel">Entrar</button>
+          <button type="button" data-tabgroup="auth" data-panel="registerPanel">Criar conta</button>
+        </div>
+
+        <div id="loginPanel">
+          <form id="loginForm" class="form-stack">
+            <div class="field"><label class="label" for="loginEmail">E-mail</label><input class="input" id="loginEmail" name="email" type="email" required autocomplete="email"></div>
+            <div class="field"><label class="label" for="loginPassword">Senha</label><input class="input" id="loginPassword" name="password" type="password" required autocomplete="current-password"></div>
+            <button class="btn btn-primary btn-block btn-lg" type="submit">Entrar</button>
+          </form>
+        </div>
+
+        <div id="registerPanel" class="hidden">
+          <form id="registerForm" class="form-stack">
+            <div class="field"><label class="label" for="regName">Nome</label><input class="input" id="regName" name="name" required maxlength="60" autocomplete="name"></div>
+            <div class="field"><label class="label" for="regEmail">E-mail</label><input class="input" id="regEmail" name="email" type="email" required autocomplete="email"></div>
+            <div class="field"><label class="label" for="regPhone">Telefone com DDD</label><input class="input" id="regPhone" name="phone" type="tel" required placeholder="(35) 99999-9999" autocomplete="tel"></div>
+            <div class="field">
+              <label class="label" for="regPassword">Senha</label>
+              <input class="input" id="regPassword" name="password" type="password" required minlength="6" autocomplete="new-password">
+              <p class="hint">Mínimo de 6 caracteres.</p>
+            </div>
+            <button class="btn btn-primary btn-block btn-lg" type="submit">Criar conta</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Meus agendamentos -->
+  <div id="listView" class="hidden">
+    <div class="pole-bar"></div>
+    <header class="topbar">
+      <div class="wrap-sm topbar-in">
+        <a href="/" class="brand"><img class="brand-mark" src="/favicon.svg" alt="">Clube da Navalha</a>
+        <div class="topbar-actions">
+          <span id="clientName" class="muted" style="font-size:.9rem;max-width:32vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+          <button id="logoutBtn" class="btn btn-ghost btn-sm" type="button">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap-sm client-main">
+      <h2>Meus agendamentos</h2>
+      <h3 class="group-title">Próximos horários</h3>
+      <div id="upcomingList"></div>
+      <h3 class="group-title">Histórico</h3>
+      <div id="pastList"></div>
+    </main>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/cliente.js"></script>
+</body>
+</html>

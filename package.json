@@ -1,0 +1,22 @@
+{
+  "name": "barbershop-saas",
+  "version": "3.0.0",
+  "description": "SaaS multi-tenant de agendamento para barbearias (Vercel + Neon Postgres)",
+  "main": "local.js",
+  "scripts": {
+    "start": "node local.js",
+    "dev": "node --watch local.js",
+    "db:check": "node scripts/check-db.js",
+    "gen-secret": "node -e \"console.log(require('crypto').randomBytes(48).toString('hex'))\""
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.16.0"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Clube da Navalha",
+  "short_name": "Clube da Navalha",
+  "description": "Agendamento online para barbearias",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#081325",
+  "theme_color": "#081325",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

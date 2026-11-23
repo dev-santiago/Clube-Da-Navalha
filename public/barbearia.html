@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081325">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Agende seu horário</title>
+</head>
+<body>
+  <div id="toasts"></div>
+
+  <div id="loading" class="state-page"><div class="skeleton" aria-label="Carregando barbearia"></div></div>
+
+  <main id="notFound" class="state-page hidden">
+    <div>
+      <h1>Barbearia não encontrada</h1>
+      <p>Confira se o link está correto ou peça o endereço atualizado para a barbearia.</p>
+      <a href="/" class="btn btn-ghost">Ir para o início</a>
+    </div>
+  </main>
+
+  <div id="page" class="hidden">
+    <div class="pole-bar"></div>
+    <header class="topbar">
+      <div class="wrap topbar-in">
+        <a href="/" class="brand"><img class="brand-mark" src="/favicon.svg" alt="">Clube da Navalha</a>
+        <div class="topbar-actions" id="userBar"></div>
+      </div>
+    </header>
+
+    <section class="shop-hero">
+      <div class="wrap">
+        <div>
+          <h1 id="shopName"></h1>
+          <p id="shopHours" class="shop-hours"></p>
+        </div>
+        <a id="shopWhats" class="btn btn-whats" target="_blank" rel="noopener" href="#">Falar no WhatsApp</a>
+      </div>
+    </section>
+
+    <main class="wrap">
+      <div id="booking" class="book">
+        <div class="book-steps">
+          <section>
+            <div class="step-h"><b>1</b><h2>Escolha os serviços</h2></div>
+            <div id="services"></div>
+          </section>
+
+          <section>
+            <div class="step-h"><b>2</b><h2>Escolha o dia</h2></div>
+            <div id="dayStrip" class="day-strip" role="listbox" aria-label="Próximos dias"></div>
+            <label class="other-date">Outra data
+              <input id="date" class="input" type="date" aria-label="Data do agendamento">
+            </label>
+          </section>
+
+          <section>
+            <div class="step-h"><b>3</b><h2>Escolha o horário</h2></div>
+            <div id="slots"></div>
+          </section>
+        </div>
+
+        <aside id="summary" class="summary" aria-live="polite">
+          <h2>Seu agendamento</h2>
+          <dl>
+            <div><dt>Serviços</dt><dd id="sumService" class="placeholder">Escolha um ou mais serviços</dd></div>
+            <div><dt>Dia</dt><dd id="sumDate" class="placeholder">-</dd></div>
+            <div><dt>Horário</dt><dd id="sumTime" class="placeholder">Escolha um horário</dd></div>
+            <div class="total"><dt>Total</dt><dd id="sumTotal">R$ 0,00</dd></div>
+          </dl>
+          <button id="confirmBtn" class="btn btn-primary btn-lg btn-block" type="button" disabled>Confirmar agendamento</button>
+          <p id="loginHint" class="hint"></p>
+        </aside>
+      </div>
+
+      <section id="success" class="success hidden">
+        <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+        <h2>Horário confirmado</h2>
+        <p id="successText"></p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="/cliente">Ver meus agendamentos</a>
+          <a id="successWhats" class="btn btn-whats" target="_blank" rel="noopener" href="#">Avisar no WhatsApp</a>
+          <button id="againBtn" class="btn btn-ghost" type="button">Fazer outro agendamento</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Login/cadastro rápido do cliente -->
+  <div id="authModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="panel">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
+        <div>
+          <h2 id="modalTitle" style="font-size:1.4rem;font-weight:800">Entre para confirmar</h2>
+          <p class="muted" style="margin-top:.35rem;font-size:.92rem">Seu horário fica salvo na sua conta e você pode cancelar depois.</p>
+        </div>
+        <button id="closeModal" class="btn btn-ghost btn-sm" type="button" aria-label="Fechar">Fechar</button>
+      </div>
+
+      <div class="seg" style="margin:1.25rem 0">
+        <button type="button" class="active" data-tabgroup="modal" data-panel="mLoginPanel">Já tenho conta</button>
+        <button type="button" data-tabgroup="modal" data-panel="mRegisterPanel">Criar conta</button>
+      </div>
+
+      <div id="mLoginPanel">
+        <form id="mLogin" class="form-stack">
+          <div class="field"><label class="label" for="mLoginEmail">E-mail</label><input class="input" id="mLoginEmail" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label class="label" for="mLoginPassword">Senha</label><input class="input" id="mLoginPassword" name="password" type="password" required autocomplete="current-password"></div>
+          <button class="btn btn-primary btn-block" type="submit">Entrar e confirmar</button>
+        </form>
+      </div>
+
+      <div id="mRegisterPanel" class="hidden">
+        <form id="mRegister" class="form-stack">
+          <div class="field"><label class="label" for="mRegName">Nome</label><input class="input" id="mRegName" name="name" required maxlength="60" autocomplete="name"></div>
+          <div class="field"><label class="label" for="mRegEmail">E-mail</label><input class="input" id="mRegEmail" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label class="label" for="mRegPhone">Telefone com DDD</label><input class="input" id="mRegPhone" name="phone" type="tel" required placeholder="(35) 99999-9999" autocomplete="tel"></div>
+          <div class="field"><label class="label" for="mRegPassword">Senha</label><input class="input" id="mRegPassword" name="password" type="password" required minlength="6" autocomplete="new-password"></div>
+          <button class="btn btn-primary btn-block" type="submit">Criar conta e confirmar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/barbearia.js"></script>
+</body>
+</html>
