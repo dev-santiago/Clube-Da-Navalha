@@ -112,7 +112,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg>Serviços
         </button>
         <button class="nav-item" type="button" data-tabgroup="dash" data-panel="settingsPanel">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Horários
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ajustes
         </button>
         <button class="nav-item" type="button" data-tabgroup="dash" data-panel="revenuePanel">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Faturamento
@@ -120,34 +120,24 @@
       </nav>
 
       <main class="app-main">
-        <section class="link-card" aria-label="Link público">
-          <label class="label" for="publicLink">Link da sua barbearia</label>
-          <div class="link-row">
-            <input id="publicLink" class="input" readonly>
-            <div class="link-actions">
-              <button id="copyBtn" class="btn btn-primary" type="button">Copiar link</button>
-              <a id="openLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Abrir página</a>
-            </div>
-          </div>
-          <p class="hint" style="margin:0">Envie aos clientes ou coloque na bio do Instagram.</p>
-        </section>
 
         <!-- Agenda -->
         <section id="agendaPanel">
-          <div class="page-head"><div><h2>Agenda</h2><p id="dayTitle" class="day-title muted"></p></div></div>
-          <div id="weekStrip" class="week-strip" role="listbox" aria-label="Dias da semana"></div>
-          <div class="day-bar">
-            <button id="prevDay" class="btn btn-ghost" type="button" aria-label="Dia anterior">Anterior</button>
-            <label class="sr-only" for="agendaDate">Data</label>
-            <input id="agendaDate" class="input" type="date">
-            <button id="nextDay" class="btn btn-ghost" type="button" aria-label="Próximo dia">Próximo</button>
-            <span class="spacer"></span>
-            <button id="todayBtn" class="btn btn-ghost" type="button">Hoje</button>
+          <div class="hello">
+            <h2 id="helloTitle">Olá</h2>
+            <p id="dayTitle"></p>
           </div>
+          <div class="week-head">
+            <button id="prevDay" class="icon-btn" type="button" aria-label="Semana anterior">&#8249;</button>
+            <span id="weekLabel"></span>
+            <button id="nextDay" class="icon-btn" type="button" aria-label="Próxima semana">&#8250;</button>
+            <button id="todayBtn" class="today-btn" type="button">Hoje</button>
+            <input id="agendaDate" type="hidden">
+          </div>
+          <div id="weekStrip" class="week-strip" role="listbox" aria-label="Dias da semana"></div>
           <div class="stats">
             <div class="stat"><span>Agendados</span><strong id="statScheduled">0</strong></div>
-            <div class="stat"><span>Concluídos</span><strong id="statDone">0</strong></div>
-            <div class="stat money"><span>Faturado</span><strong id="statRevenue">R$ 0,00</strong></div>
+            <div class="stat money"><span>Faturado</span><strong id="statRevenue">R$ 0,00</strong><small><b id="statDone">0</b> concluídos</small></div>
           </div>
           <div id="agendaList" class="timeline"></div>
         </section>
@@ -198,7 +188,18 @@
 
         <!-- Horários -->
         <section id="settingsPanel" class="hidden">
-          <div class="page-head"><div><h2>Horários</h2><p>Quando a barbearia atende. Vale para todos os dias.</p></div></div>
+          <div class="page-head"><div><h2>Ajustes</h2><p>Seu link e os horários de atendimento.</p></div></div>
+        <section class="link-card" aria-label="Link público" style="margin:0 0 1.2rem">
+          <label class="label" for="publicLink">Link da sua barbearia</label>
+          <div class="link-row">
+            <input id="publicLink" class="input" readonly>
+            <div class="link-actions">
+              <button id="copyBtn" class="btn btn-primary" type="button">Copiar link</button>
+              <a id="openLink" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Abrir página</a>
+            </div>
+          </div>
+          <p class="hint" style="margin:0">Envie aos clientes ou coloque na bio do Instagram.</p>
+        </section>
           <form id="settingsForm" class="panel form-stack" style="max-width:520px">
             <div class="grid-2">
               <div><label class="label" for="openTime">Abertura</label><input class="input" id="openTime" type="time" required></div>

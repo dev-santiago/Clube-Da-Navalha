@@ -27,8 +27,8 @@
   async function boot() {
     setupTabs('auth');
     setupTabs('dash', (panel) => { if (panel === 'agendaPanel') loadAgenda(); if (panel === 'revenuePanel') loadRevenue(); });
-    $('prevDay').onclick = () => { $('agendaDate').value = shiftDate($('agendaDate').value, -1); loadAgenda(); };
-    $('nextDay').onclick = () => { $('agendaDate').value = shiftDate($('agendaDate').value, 1); loadAgenda(); };
+    $('prevDay').onclick = () => { $('agendaDate').value = shiftDate($('agendaDate').value, -7); loadAgenda(); };
+    $('nextDay').onclick = () => { $('agendaDate').value = shiftDate($('agendaDate').value, 7); loadAgenda(); };
     $('todayBtn').onclick = () => { $('agendaDate').value = todayISO(); loadAgenda(); };
     $('agendaDate').onchange = loadAgenda;
     $('logoutBtn').onclick = () => logout();
@@ -48,6 +48,7 @@
   function enter() {
     show('dash');
     $('shopName').textContent = me.name;
+    $('helloTitle').textContent = 'Olá, ' + me.name;
     const link = `${location.origin}/b/${me.slug}`;
     $('publicLink').value = link;
     $('openLink').href = link;
@@ -264,6 +265,9 @@
 
     renderWeek(date);
     $('dayTitle').textContent = fmtLongDate(date);
+    const ws = shiftDate(date, -((new Date(date + 'T12:00:00').getDay() + 6) % 7));
+    const we = shiftDate(ws, 6);
+    $('weekLabel').textContent = `${Number(ws.slice(8))} ${monthShort(ws)} a ${Number(we.slice(8))} ${monthShort(we)}`;
     $('statScheduled').textContent = scheduled;
     $('statDone').textContent = done.length;
     $('statRevenue').textContent = money(revenue);
@@ -275,23 +279,14 @@
 
     const cls = { concluido: ' done', cancelado: ' cancelled' };
     $('agendaList').innerHTML = list.map((a) => {
-      const msg = 'Olá, ' + a.client_name + '! Aqui é da ' + me.name + ' sobre seu horário de ' + fmtDate(a.date) + ' às ' + a.start_time + '.';
       return `
       <article class="appt${cls[a.status] || ''}" data-appt="${a.id}" tabindex="0">
-        <div class="appt-time"><strong>${esc(a.start_time)}</strong><span>até ${esc(a.end_time)}</span></div>
-        <div class="appt-main">
-          <div class="appt-info">
-            <p>${esc(a.client_name)}</p>
-            <p class="sub">${esc(a.service_name)}, ${money(a.price)}</p>
-            <a class="wa-link" href="${waLink(a.client_phone, msg)}" target="_blank" rel="noopener">WhatsApp ${esc(fmtPhone(a.client_phone))}</a>
-          </div>
-          <div class="appt-actions">
-            ${statusBadge(a.status)}
-            ${a.status === 'agendado' ? `
-              <button class="btn btn-ok btn-sm" data-status="concluido" data-id="${a.id}">Concluir</button>
-              <button class="btn btn-danger btn-sm" data-status="cancelado" data-id="${a.id}">Cancelar</button>` : ''}
-          </div>
+        <div class="appt-time"><strong>${esc(a.start_time)}</strong><span>${esc(a.end_time)}</span></div>
+        <div class="appt-info">
+          <p>${esc(a.client_name)}</p>
+          <p class="sub">${esc(a.service_name)}</p>
         </div>
+        <div class="appt-side"><b>${esc(money(a.price))}</b>${statusBadge(a.status)}</div>
       </article>`;
     }).join('');
   }

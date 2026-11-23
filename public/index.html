@@ -108,10 +108,10 @@
       .step{padding:4.6rem 1.5rem 1.5rem}
       .step::before{left:1.5rem;top:1.5rem}
       .feats{grid-template-columns:repeat(6,1fr)}
-      .feat{grid-column:span 2}.feat.big{grid-column:span 3}
+      .feat{grid-column:span 2}.feat.big{grid-column:span 3}.feat:not(.big){grid-column:span 6}
       .appbar{display:none}body{padding-bottom:0}
     }
-    @media(max-width:859px){.hide-sm{display:none}.stage{padding-bottom:2rem}}
+    @media(max-width:859px){.hide-sm{display:none}.stage{padding:0 0 2rem}.pole,.toast{display:none}.phone{margin-left:0;width:100%}.topbar-actions{display:none}}
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
   </style>
 </head>
@@ -197,16 +197,6 @@
             <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
             <h3>Agenda do dia</h3>
             <p>Veja quem vem, a que horas e quanto já faturou.</p>
-          </article>
-          <article class="feat">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-5a8 8 0 1 1 16-3z"/></svg></div>
-            <h3>WhatsApp em um toque</h3>
-            <p>Chame o cliente com a mensagem já escrita.</p>
-          </article>
-          <article class="feat">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-            <h3>Seu expediente respeitado</h3>
-            <p>Abertura, fechamento e almoço definidos por você.</p>
           </article>
         </div>
       </div>
