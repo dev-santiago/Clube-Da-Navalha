@@ -1,8 +1,9 @@
-const CACHE_NAME = 'clube-da-navalha-v1';
+const CACHE_NAME = 'clube-da-navalha-v3';
 const APP_SHELL = [
   '/',
   '/admin',
   '/cliente',
+  '/owner',
   '/offline.html',
   '/manifest.webmanifest',
   '/favicon.svg',
@@ -11,11 +12,13 @@ const APP_SHELL = [
   '/icons/app-512.png',
   '/css/style.css',
   '/css/admin-theme.css',
+  '/css/owner-theme.css',
   '/js/common.js',
   '/js/admin.js',
   '/js/cliente.js',
   '/js/barbearia.js',
   '/js/pwa.js',
+  '/js/owner.js',
 ];
 
 self.addEventListener('install', (event) => {
@@ -45,7 +48,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith((async () => {
       try {
         const response = await fetch(request);
-        if (response.ok && ['/','/admin','/cliente'].includes(url.pathname)) {
+        if (response.ok && ['/','/admin','/cliente','/owner'].includes(url.pathname)) {
           const cache = await caches.open(CACHE_NAME);
           await cache.put(url.pathname, response.clone());
         }

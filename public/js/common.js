@@ -1,5 +1,5 @@
 const API = '/api';
-const TOKEN_KEYS = { admin: 'bs_admin_token', client: 'bs_client_token' };
+const TOKEN_KEYS = { admin: 'bs_admin_token', client: 'bs_client_token', owner: 'bs_owner_token' };
 
 const Auth = {
   get: (role) => localStorage.getItem(TOKEN_KEYS[role]),

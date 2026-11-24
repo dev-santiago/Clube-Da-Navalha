@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 const page = (file) => (req, res) => res.sendFile(path.join(__dirname, 'public', file));
 app.get('/admin', page('admin.html'));
+app.get('/owner', page('owner.html'));
 app.get('/cliente', page('cliente.html'));
 app.get('/b/:slug', page('barbearia.html'));
 

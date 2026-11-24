@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1113">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/icons/app-180.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/owner-theme.css">
+  <title>Central do Clube | Clube da Navalha</title>
+</head>
+<body class="owner-page">
+  <div id="toasts"></div>
+
+  <main id="ownerAuth" class="owner-auth">
+    <section class="owner-auth-card">
+      <a href="/" class="brand"><img class="brand-mark" src="/favicon.svg" alt="">Clube da Navalha</a>
+      <span class="owner-eyebrow">ACESSO RESTRITO</span>
+      <h1>Central do proprietário</h1>
+      <p>Entre para consultar as barbearias cadastradas e controlar as cobranças.</p>
+      <form id="ownerLoginForm" class="form-stack">
+        <div class="field">
+          <label class="label" for="ownerEmail">E-mail de acesso</label>
+          <input class="input" id="ownerEmail" name="email" type="email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label class="label" for="ownerPassword">Senha</label>
+          <input class="input" id="ownerPassword" name="password" type="password" required autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">Entrar na central</button>
+      </form>
+      <a class="owner-back" href="/">Voltar ao site</a>
+    </section>
+  </main>
+
+  <div id="ownerDashboard" class="owner-dashboard hidden">
+    <header class="owner-topbar">
+      <div class="owner-topbar-inner">
+        <div>
+          <span class="owner-eyebrow">CLUBE DA NAVALHA</span>
+          <h1>Central de cobrança</h1>
+        </div>
+        <button id="ownerLogout" class="btn btn-ghost btn-sm" type="button">Sair</button>
+      </div>
+    </header>
+
+    <main class="owner-content">
+      <section class="owner-intro">
+        <div>
+          <h2>Barbearias e pagamentos</h2>
+          <p>Defina o valor do mês, envie a cobrança pelo WhatsApp e marque quando receber.</p>
+        </div>
+        <label class="owner-month-label" for="billingMonth">Mês de referência
+          <input id="billingMonth" class="input" type="month" required>
+        </label>
+      </section>
+
+      <section class="owner-stats" aria-label="Resumo das cobranças">
+        <article class="owner-stat"><span>Barbearias cadastradas</span><strong id="shopCount">0</strong></article>
+        <article class="owner-stat"><span>Total lançado</span><strong id="chargeTotal">R$ 0,00</strong></article>
+        <article class="owner-stat"><span>A receber</span><strong id="pendingTotal">R$ 0,00</strong></article>
+        <article class="owner-stat owner-stat-paid"><span>Recebido no mês</span><strong id="paidTotal">R$ 0,00</strong></article>
+      </section>
+
+      <section class="owner-list-section">
+        <div class="owner-list-head">
+          <div><h2>Suas barbearias</h2><p id="listCaption">Cadastros mais recentes primeiro.</p></div>
+          <label class="owner-search-label" for="shopSearch">Buscar
+            <input id="shopSearch" class="input" type="search" placeholder="Nome ou e-mail">
+          </label>
+        </div>
+        <div id="barbershopList" class="owner-shop-list" aria-live="polite">
+          <div class="owner-empty">Carregando barbearias…</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/owner.js"></script>
+  <script src="/js/pwa.js"></script>
+</body>
+</html>

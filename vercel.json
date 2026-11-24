@@ -3,6 +3,7 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
     { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/owner", "destination": "/owner.html" },
     { "source": "/cliente", "destination": "/cliente.html" },
     { "source": "/b/:slug", "destination": "/barbearia.html" }
   ],

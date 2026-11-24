@@ -30,10 +30,15 @@ schema.sql          o mesmo SQL que o db.js cria sozinho
 4. **Variáveis:** em Settings > Environment Variables, cadastre:
    - `JWT_SECRET`: um texto longo e aleatório (gere com `npm run gen-secret`)
    - `APP_TIMEZONE`: `America/Sao_Paulo`
+   - `OWNER_EMAIL` e `OWNER_PASSWORD`: seu e-mail e uma senha exclusiva com pelo menos 12 caracteres para acessar `/owner`
 5. **Redeploy:** Deployments > menu do último deploy > Redeploy (variáveis só valem após novo deploy).
 6. **Conferir:** abra `https://SEU-SITE.vercel.app/api/health`. O esperado é
    `{"DATABASE_URL":true,"fonte":"DATABASE_URL","JWT_SECRET":true,"banco":"conectado"}`.
 7. Abra `/admin`, clique em **Criar conta** e cadastre a barbearia.
+
+### Central privada de cobranças
+
+Configure `OWNER_EMAIL` e `OWNER_PASSWORD` no `.env` local ou nas variáveis da Vercel. Depois abra `/owner` para ver as barbearias, lançar o valor mensal, definir vencimento, enviar a cobrança por WhatsApp e marcar pagamentos. A central não tem cadastro público; use uma senha forte e exclusiva.
 
 As tabelas são criadas sozinhas no primeiro acesso. Se preferir, rode o `schema.sql`
 no editor SQL do Neon.

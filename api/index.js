@@ -39,6 +39,7 @@ app.use('/api', async (req, res, next) => {
 app.use('/api/admin', require('../routes/admin'));
 app.use('/api/client', require('../routes/client'));
 app.use('/api/public', require('../routes/public'));
+app.use('/api/owner', require('../routes/owner'));
 app.use('/api', (req, res) => res.status(404).json({ error: 'Rota não encontrada.' }));
 
 app.use((err, req, res, next) => {

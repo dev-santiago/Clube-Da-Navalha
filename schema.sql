@@ -48,6 +48,20 @@ ALTER TABLE appointments ADD COLUMN IF NOT EXISTS services_label TEXT;
 ALTER TABLE appointments ADD COLUMN IF NOT EXISTS total_price NUMERIC(10,2);
 
 ALTER TABLE appointments ADD COLUMN IF NOT EXISTS payment_method TEXT;
+CREATE TABLE IF NOT EXISTS platform_charges (
+  id            SERIAL PRIMARY KEY,
+  barbershop_id INTEGER NOT NULL REFERENCES barbershops(id) ON DELETE CASCADE,
+  billing_month TEXT NOT NULL CHECK (billing_month ~ '^[0-9]{4}-(0[1-9]|1[0-2])$'),
+  amount        NUMERIC(10,2) NOT NULL CHECK (amount >= 0),
+  status        TEXT NOT NULL DEFAULT 'pendente' CHECK (status IN ('pendente', 'pago')),
+  due_date      TEXT,
+  paid_at       TIMESTAMPTZ,
+  notes         TEXT,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  UNIQUE (barbershop_id, billing_month)
+);
+CREATE INDEX IF NOT EXISTS idx_platform_charges_month_status ON platform_charges(billing_month, status);
 -- agendamentos antigos passam a ter nome e valor próprios (idempotente)
 UPDATE appointments a SET services_label = s.name, total_price = s.price
   FROM services s WHERE s.id = a.service_id AND a.total_price IS NULL;
