@@ -1,6 +1,6 @@
 /* Painel do Clube da Navalha — preto, branco e laranja */
 html,body{max-width:100%;overflow-x:hidden}
-body .app{background:radial-gradient(50% 28% at 100% 0,rgba(255,106,0,.13),transparent 70%),var(--bg)}
+body .app{background:radial-gradient(50% 28% at 100% 0,rgba(145,185,166,.12),transparent 70%),var(--bg)}
 body .app-top{position:sticky;top:0;z-index:30;background:rgba(0,0,0,.82);backdrop-filter:blur(16px);padding-top:env(safe-area-inset-top,0px)}
 body .app-main{width:min(760px,100%);margin-inline:auto;padding-bottom:7rem}
 
@@ -33,7 +33,7 @@ body .stat{padding:1.1rem 1.3rem;border-radius:22px;background:var(--surface);bo
 body .stat span{font-size:.85rem}
 body .stat strong{font:700 1.7rem/1.1 var(--font-display)}
 body .stat small{display:block;margin-top:.25rem;font-size:.82rem;color:var(--muted)}
-body .stat:first-child{position:relative;overflow:hidden;padding:1.7rem 1.6rem 1.8rem;border:0;border-radius:28px;background:var(--accent);box-shadow:0 22px 50px rgba(255,106,0,.28);animation:pop .6s var(--spring) both}
+body .stat:first-child{position:relative;overflow:hidden;padding:1.7rem 1.6rem 1.8rem;border:0;border-radius:28px;background:linear-gradient(135deg,#b7d1c1,#83aa97);box-shadow:0 22px 50px rgba(104,151,128,.22);animation:pop .6s var(--spring) both}
 body .stat:first-child::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.18);animation:glow 5s ease-in-out infinite alternate}
 body .stat:first-child span{position:relative;z-index:1;font:600 1rem var(--font-body);color:rgba(0,0,0,.72)}
 body .stat:first-child strong{position:relative;z-index:1;margin-top:.2rem;font:800 clamp(3.4rem,15vw,5rem)/1 var(--font-display);letter-spacing:-.05em;color:#000}

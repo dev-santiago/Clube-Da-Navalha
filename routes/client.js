@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
   if (phone.length < 10 || phone.length > 13) return res.status(400).json({ error: 'Telefone inválido. Use DDD + número.' });
   if (password.length < 6) return res.status(400).json({ error: 'A senha precisa ter pelo menos 6 caracteres.' });
 
-  const hash = bcrypt.hashSync(password, 10);
+  const hash = await bcrypt.hash(password, 10);
   let client;
   try {
     client = await db.one(
@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
   const password = typeof req.body.password === 'string' ? req.body.password : '';
   const client = await db.one('SELECT * FROM clients WHERE email = $1', [email]);
 
-  if (!client || !bcrypt.compareSync(password, client.password_hash)) {
+  if (!client || !(await bcrypt.compare(password, client.password_hash))) {
     return res.status(401).json({ error: 'E-mail ou senha incorretos.' });
   }
   res.json({ token: sign({ id: client.id, role: 'client' }), client: clientData(client) });

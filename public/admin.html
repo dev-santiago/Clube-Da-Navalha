@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#0b1113">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/admin-theme.css">
   <title>Painel da barbearia | Clube da Navalha</title>
@@ -17,7 +17,7 @@
   <div id="toasts"></div>
 
   <!-- Login e cadastro da barbearia -->
-  <div id="authView" class="auth-page hidden">
+  <div id="authView" class="auth-page">
     <aside class="auth-side">
       <div class="pole" aria-hidden="true"></div>
       <div class="auth-side-copy">

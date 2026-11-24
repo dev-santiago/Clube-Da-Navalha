@@ -44,7 +44,7 @@ router.post('/register', async (req, res) => {
   }
   if (RESERVED_SLUGS.includes(slug)) return res.status(400).json({ error: 'Esse link é reservado. Escolha outro.' });
 
-  const hash = bcrypt.hashSync(password, 10);
+  const hash = await bcrypt.hash(password, 10);
   let shop;
   try {
     shop = await db.one(
@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
   const password = typeof req.body.password === 'string' ? req.body.password : '';
   const shop = await db.one('SELECT * FROM barbershops WHERE email = $1', [email]);
 
-  if (!shop || !bcrypt.compareSync(password, shop.password_hash)) {
+  if (!shop || !(await bcrypt.compare(password, shop.password_hash))) {
     return res.status(401).json({ error: 'E-mail ou senha incorretos.' });
   }
   res.json({ token: sign({ id: shop.id, role: 'barbershop' }), barbershop: shopData(shop) });
