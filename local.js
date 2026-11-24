@@ -8,7 +8,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(api);
-app.use(express.static(path.join(__dirname, 'public'), { maxAge: '1h', etag: true }));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1h',
+  etag: true,
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('service-worker.js')) res.setHeader('Cache-Control', 'no-cache');
+  },
+}));
 
 const page = (file) => (req, res) => res.sendFile(path.join(__dirname, 'public', file));
 app.get('/admin', page('admin.html'));
