@@ -100,12 +100,13 @@
 
   $('ownerLoginForm').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const button = event.currentTarget.querySelector('button[type="submit"]');
+    const form = event.currentTarget;
+    const button = form.querySelector('button[type="submit"]');
     await withBusy(button, async () => {
       try {
-        const result = await api('/owner/login', { method: 'POST', body: Object.fromEntries(new FormData(event.currentTarget)) });
+        const result = await api('/owner/login', { method: 'POST', body: Object.fromEntries(new FormData(form)) });
         Auth.set('owner', result.token);
-        event.currentTarget.reset();
+        form.reset();
         showDashboard();
         await loadBarbershops();
       } catch (error) {
